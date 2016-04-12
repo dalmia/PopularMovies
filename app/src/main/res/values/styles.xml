@@ -14,4 +14,29 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="TextView.Body1.Thin" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/blackSecondaryText</item>
+        <item name="android:textSize">@dimen/cardview_body_text_size</item>
+        <item name="customFont">roboto_light.ttf</item>
+
+    </style>
+
+    <style name="TextView.Title.Thin" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/small_headline</item>
+        <item name="customFont">roboto_light.ttf</item>
+
+    </style>
+
+    <style name="TextView.Title.Note" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/small_headline</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="customFont">roboto_medium.ttf</item>
+    </style>
+
 </resources>

@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">Popular Movies</string>
     <string name="action_settings">Settings</string>
+    <string name="api_key">ffe6e61f171a46ab95f2b3105b553f5c</string>
+    <string name="movies_base_url">http://api.themoviedb.org/3/discover/movie?</string>
+    <string name="image_base_url">http://image.tmdb.org/t/p/w185</string>
+    <string name="title_activity_movie_detail">Details</string>
+    <string name="fetch_movies_tag">tag_fetch_movies</string>
+    <string name="sort_param_key">sort_by</string>
+    <string name="api_param_key">api_key</string>
+    <string name="most_popular_url_value">popularity.desc</string>
+    <string name="highest_rated_url_value">vote_average.desc</string>
+    <string-array name="sort_choice_list">
+        <item>Most Popular</item>
+        <item>Highest Rated</item>
+    </string-array>
 </resources>
