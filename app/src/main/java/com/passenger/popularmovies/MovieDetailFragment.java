@@ -3,6 +3,7 @@ package com.passenger.popularmovies;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ import static com.passenger.popularmovies.Constants.MOVIE_DETAILS;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Fragment class of MovieDetailActivity
  */
 public class MovieDetailFragment extends Fragment {
 
@@ -43,6 +44,7 @@ public class MovieDetailFragment extends Fragment {
         initiate(view);
         if (getActivity().getIntent() != null) {
             Bundle movieDetails = getActivity().getIntent().getExtras();
+            //get the intent passed
             Movie movie = new Gson().fromJson(movieDetails.getSerializable(MOVIE_DETAILS).toString(),
                     new TypeToken<Movie>() {
                     }.getType());
@@ -52,16 +54,26 @@ public class MovieDetailFragment extends Fragment {
                         .load(imageBaseUrl + movie.poster)
                         .into(poster);
             }
-            String[] dateParameters = movie.releaseDate.split("-");
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Integer.valueOf(dateParameters[0]),Integer.valueOf(dateParameters[1]),Integer.valueOf(dateParameters[2]));
-            Date date = new Date(calendar.getTimeInMillis());
-            rating.setText("\nRating : " + movie.rating + "/10" );
+            //Getting the year,month and day from the received
+            //release date to format as required
+            if (!movie.releaseDate.equals("")) {
+                String[] dateParameters = movie.releaseDate.split("-");
+                //Creating a new instance of calendar
+                Calendar calendar = Calendar.getInstance();
+                //Setting the calendar time to the one received as releaseDate
+                if (dateParameters.length > 0) {
+                    calendar.set(Integer.valueOf(dateParameters[0]), Integer.valueOf(dateParameters[1]), Integer.valueOf(dateParameters[2]));
+                    Date date = new Date(calendar.getTimeInMillis());
+                    //Used to format the date as required
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd EEEE yyyy", Locale.US);
+                    movie.releaseDate = sdf.format(date);
+                    releaseDate.setText("Release Date : \n" + movie.releaseDate);
+                }
+            }
+            //Set the values for each view
+            rating.setText("\nRating : " + movie.rating + "/10");
             title.setText(movie.title);
             summary.setText(movie.summary);
-            SimpleDateFormat sdf = new SimpleDateFormat("dd EEEE yyyy", Locale.US);
-            movie.releaseDate = sdf.format(date);
-            releaseDate.setText("Release Date : \n" + movie.releaseDate);
 
 
         }
@@ -69,6 +81,11 @@ public class MovieDetailFragment extends Fragment {
 
     }
 
+    /**
+     * Initiate the views
+     *
+     * @param view
+     */
     public void initiate(View view) {
         poster = (ImageView) view.findViewById(R.id.poster);
         title = (TextView) view.findViewById(R.id.title);

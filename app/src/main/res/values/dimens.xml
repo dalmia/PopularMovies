@@ -18,4 +18,6 @@
     <dimen name="sort_movies_dropdown_padding">10dp</dimen>
     <dimen name="sort_movies_item_padding">10dp</dimen>
     <dimen name="sort_movies_item_text_size">12sp</dimen>
+    <dimen name="title_padding">10dp</dimen>
+    <dimen name="poster_margin">10dp</dimen>
 </resources>

@@ -1,7 +1,7 @@
 package com.passenger.popularmovies;
 
 /**
- * Created by aman on 2/4/16.
+ * Custom object for each movie that we fetch
  */
 public class Movie {
 

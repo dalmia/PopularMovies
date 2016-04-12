@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -52,6 +51,8 @@ public class MoviesActivity extends AppCompatActivity {
     MoviesAdapter mAdapter;
     ArrayList<Movie> movies;
     RecyclerView.LayoutManager mLayoutManager;
+    //current choice to determine whether 'highest rated' is selected
+    // or 'Most Popular' is selected
     int currentSortChoice = 0;
 
 
@@ -59,18 +60,18 @@ public class MoviesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_movies);
-        mRecyclerView = (RecyclerView) findViewById(R.id.movies_list);
+        setupToolbar();
         setupRecyclerView();
         setupSpinner();
-        setSupportActionBar(toolbar);
-        toolbar.setTitle(getResources().getString(R.string.app_name));
-        try {if (isNetworkAvailable()) {
-            FetchMovies();
-        } else {
 
-            Toast.makeText(getApplicationContext(), "Please enable Internet Connection!", Toast.LENGTH_SHORT).show();
-        }
+        try {
+            //Check internet connectivity
+            if (isConnected()) {
+                FetchMovies();
+            } else {
+
+                Toast.makeText(getApplicationContext(), R.string.check_internet_connection, Toast.LENGTH_SHORT).show();
+            }
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -78,23 +79,33 @@ public class MoviesActivity extends AppCompatActivity {
 
     }
 
+    public void setupToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_movies);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle(getResources().getString(R.string.app_name));
+    }
+
     public void setupSpinner() {
         Spinner sortMovies = (Spinner) findViewById(R.id.sort_movies);
+        //setting custom textView as spinner item
         ArrayAdapter<CharSequence> sortOrderAdapter = ArrayAdapter.createFromResource(this,
                 R.array.sort_choice_list, R.layout.sort_movies_list_item);
+        //setting custom textView as spinner dropdown item
         sortOrderAdapter.setDropDownViewResource(R.layout.sort_movies_dropdown_resource);
+        //just to avoid warnings
         assert sortMovies != null;
-
         sortMovies.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Shouldn't load if already selected one is selected again
                 if (currentSortChoice != position) {
                     currentSortChoice = position;
                     try {
-                        if (isNetworkAvailable()) {
+                        //Check internet connectivity
+                        if (isConnected()) {
                             FetchMovies();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Please enable Internet Connection!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.check_internet_connection), Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -113,18 +124,25 @@ public class MoviesActivity extends AppCompatActivity {
 
     }
 
-    private boolean isNetworkAvailable() {
+
+    /**
+     * Function to check if the device is connected to the internet.
+     * Returns true if connected
+     * @return
+     */
+    private boolean isConnected() {
 
         ConnectivityManager cm =
                 (ConnectivityManager) getApplicationContext().getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
 
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return networkInfo != null &&
+                networkInfo.isConnectedOrConnecting();
     }
 
 
     public void setupRecyclerView() {
+        mRecyclerView = (RecyclerView) findViewById(R.id.movies_list);
         mLayoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
         movies = new ArrayList<>();
@@ -132,6 +150,10 @@ public class MoviesActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
+
+    /**
+     * Custom adapter to load images in the recyclerView
+     */
     public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
 
@@ -204,8 +226,8 @@ public class MoviesActivity extends AppCompatActivity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             String imageBaseUrl = mContext.getString(R.string.image_base_url);
             final Movie movie = mDataset.get(position);
+            //check if valid url is received to avoid errors.
             if (movie.poster != null) {
-                Log.d("Inside adapter", movie.poster);
                 Picasso.with(mContext)
                         .load(imageBaseUrl + movie.poster)
                         .error(R.drawable.ic_error)
@@ -241,6 +263,12 @@ public class MoviesActivity extends AppCompatActivity {
         }
     }
 
+
+    /**
+     * Function to return url to be called to fetch the movies
+     * @return
+     * @throws MalformedURLException
+     */
     public String setUrl() throws MalformedURLException {
 
         final String MOVIES_BASE_URL = getApplicationContext().getResources().
@@ -265,9 +293,13 @@ public class MoviesActivity extends AppCompatActivity {
         return url.toString();
     }
 
+    /**
+     * Function to fetch the movies list.
+     *
+     * @throws MalformedURLException
+     */
     public void FetchMovies() throws MalformedURLException {
         String url = setUrl();
-        Log.d("URL", url);
         String tag_string_req = getString(R.string.fetch_movies_tag);
         JSONObject credentialsJSON = new JSONObject();
         Log.d(TAG, credentialsJSON.toString());
@@ -279,7 +311,7 @@ public class MoviesActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Log.d(TAG, response.toString());
+                            //add the Movie objects to the adapter
                             getMoviesList(response);
 
                         } catch (Exception e) {
@@ -306,7 +338,7 @@ public class MoviesActivity extends AppCompatActivity {
         for (int i = 0; i < movieArray.length(); i++) {
 
             JSONObject movieData = movieArray.getJSONObject(i);
-            fetchedMovies.add(mAdapter.getItemCount(),new Movie(
+            fetchedMovies.add(new Movie(
                     movieData.getString(MOVIE_TITLE),
                     movieData.getString(MOVIE_POSTER),
                     movieData.getString(MOVIE_SUMMARY),
@@ -314,9 +346,9 @@ public class MoviesActivity extends AppCompatActivity {
                     movieData.getString(MOVIE_RATING)));
             Log.d(TAG, "Movies :" + i + "\n" + movieData.toString());
         }
+        //repopulate the adapter
         mAdapter.swap(fetchedMovies);
-        Log.d(TAG, String.valueOf(fetchedMovies.size()));
-        Log.d(TAG, String.valueOf(mAdapter.getItemCount()));
+
 
 
     }

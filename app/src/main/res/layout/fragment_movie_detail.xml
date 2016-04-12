@@ -4,13 +4,13 @@
     android:orientation="vertical">
 
     <com.passenger.popularmovies.TextViewPlus
-        style="@style/TextView.Title.Note"
+        style="@style/TextView.Title.Thin"
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:gravity="center"
-        android:padding="10dp"
+        android:padding="@dimen/title_padding"
         android:textColor="@android:color/white"
         android:textSize="@dimen/detail_title_text_size" />
 
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
-            android:layout_margin="10dp" />
+            android:layout_margin="@dimen/poster_margin" />
 
 
         <com.passenger.popularmovies.TextViewPlus

@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 /**
- * Custom TextView with easy font replacement
+ * Custom TextView
  *
  */
 public class TextViewPlus extends TextView {
