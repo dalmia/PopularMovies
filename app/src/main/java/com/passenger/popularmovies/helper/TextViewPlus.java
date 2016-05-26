@@ -1,4 +1,4 @@
-package com.passenger.popularmovies;
+package com.passenger.popularmovies.helper;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import com.passenger.popularmovies.R;
 
 /**
  * Custom TextView

@@ -5,34 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.MovieDetailActivity">
+    tools:mContext=".MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="0dp"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_movie_detail"
+            android:id="@+id/toolbar_movies"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <Spinner
+                android:id="@+id/sort_movies"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                 />
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/movie_detail"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".activities.MovieDetailActivity"
-        tools:showIn="@layout/activity_movie_detail">
+        tools:mContext=".MainActivity"
+        android:orientation="horizontal">
 
-    </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/movies_list"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:id="@+id/movie_detail"
+            android:layout_weight="4"
+             />
+
+
+    </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

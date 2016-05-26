@@ -1,15 +1,11 @@
-package com.passenger.popularmovies;
+package com.passenger.popularmovies.app;
 
-import android.app.Activity;
 import android.app.Application;
-import android.content.pm.ActivityInfo;
-import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-
 
 /**
  * Application Instance used for instantiating libraries like Volley
@@ -56,3 +52,4 @@ public class AppController extends Application {
         }
     }
 }
+

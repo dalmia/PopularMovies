@@ -1,9 +1,14 @@
-package com.passenger.popularmovies;
+package com.passenger.popularmovies.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+
+import com.passenger.popularmovies.R;
+import com.passenger.popularmovies.app.Constants;
+import com.passenger.popularmovies.fragments.MovieDetailFragment;
 
 /**
  * Activity that shows the details of each movie poster
@@ -26,6 +31,15 @@ public class MovieDetailActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        if (savedInstanceState == null) {
+            Bundle arguments = new Bundle();
+            arguments.putParcelable(Constants.MOVIE_DETAILS_URI, getIntent().getData());
+            Log.d("arguments", getIntent().getDataString());
+            MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
+            movieDetailFragment.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.movie_detail, movieDetailFragment).commit();
+        }
     }
 
 }

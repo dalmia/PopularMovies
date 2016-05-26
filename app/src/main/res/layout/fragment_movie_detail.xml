@@ -1,9 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <com.passenger.popularmovies.TextViewPlus
+    <com.passenger.popularmovies.helper.TextViewPlus
         style="@style/TextView.Title.Thin"
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
             android:layout_margin="@dimen/poster_margin" />
 
 
-        <com.passenger.popularmovies.TextViewPlus
+        <com.passenger.popularmovies.helper.TextViewPlus
             style="@style/TextView.Title.Thin"
             android:id="@+id/release_date"
             android:layout_width="wrap_content"
@@ -36,7 +37,7 @@
             android:layout_toRightOf="@id/poster"
             android:textSize="@dimen/details_text_large" />
 
-        <com.passenger.popularmovies.TextViewPlus
+        <com.passenger.popularmovies.helper.TextViewPlus
             style="@style/TextView.Title.Thin"
             android:id="@+id/rating"
             android:layout_width="wrap_content"
@@ -44,9 +45,10 @@
             android:layout_below="@id/release_date"
             android:layout_toEndOf="@id/poster"
             android:layout_toRightOf="@id/poster"
-            android:textSize="@dimen/details_text_small" />
+            android:textSize="@dimen/details_text_small"
+            tools:text="10/10"/>
 
-        <com.passenger.popularmovies.TextViewPlus
+        <com.passenger.popularmovies.helper.TextViewPlus
             style="@style/TextView.Body1.Thin"
             android:id="@+id/summary"
             android:layout_width="wrap_content"
