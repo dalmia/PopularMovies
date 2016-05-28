@@ -22,17 +22,31 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/movie_detail"
+        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".activities.MovieDetailActivity"
-        tools:showIn="@layout/activity_movie_detail">
+        tools:showIn="@layout/activity_movie_detail"
+        android:gravity="center">
 
-    </RelativeLayout>
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/imageView"-->
+            <!--android:src="@drawable/ic_choose_movie" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Choose a movie from the list"-->
+            <!--android:id="@+id/textView"-->
+            <!--android:textSize="20sp" />-->
+    </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

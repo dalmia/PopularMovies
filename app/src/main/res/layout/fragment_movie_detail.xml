@@ -1,63 +1,110 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <com.passenger.popularmovies.helper.TextViewPlus
-        style="@style/TextView.Title.Thin"
-        android:id="@+id/title"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:padding="@dimen/title_padding"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/detail_title_text_size" />
+        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top_small">
-
-        <ImageView
-            android:id="@+id/poster"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:layout_margin="@dimen/poster_margin" />
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_small"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/poster"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/poster_margin"
+                    android:scaleType="fitXY" />
+
+                <com.passenger.popularmovies.helper.TextViewPlus
+                    android:id="@+id/title"
+                    style="@style/TextView.Title.Thin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/details_text_large"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"/>
+
+                <com.passenger.popularmovies.helper.TextViewPlus
+                    android:id="@+id/release_date"
+                    style="@style/TextView.Title.Thin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/details_text_large"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"/>
+
+                <com.passenger.popularmovies.helper.TextViewPlus
+                    android:id="@+id/rating"
+                    style="@style/TextView.Title.Thin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/details_text_small"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"/>
+
+                <com.passenger.popularmovies.helper.TextViewPlus
+                    android:id="@+id/summary"
+                    style="@style/TextView.Body1.Thin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/summary_text_margin"
+                    android:textSize="@dimen/details_text_small" />
+
+                <TextView
+                    android:id="@+id/trailer_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@string/trailers"
+                    android:visibility="gone" />
 
 
-        <com.passenger.popularmovies.helper.TextViewPlus
-            style="@style/TextView.Title.Thin"
-            android:id="@+id/release_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/poster"
-            android:layout_toRightOf="@id/poster"
-            android:textSize="@dimen/details_text_large" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/trailers"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
 
-        <com.passenger.popularmovies.helper.TextViewPlus
-            style="@style/TextView.Title.Thin"
-            android:id="@+id/rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/release_date"
-            android:layout_toEndOf="@id/poster"
-            android:layout_toRightOf="@id/poster"
-            android:textSize="@dimen/details_text_small"
-            tools:text="10/10"/>
+                <TextView
+                    android:id="@+id/review_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@string/reviews"
+                    android:visibility="gone" />
 
-        <com.passenger.popularmovies.helper.TextViewPlus
-            style="@style/TextView.Body1.Thin"
-            android:id="@+id/summary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/poster"
-            android:padding="@dimen/summary_text_margin"
-            android:textSize="@dimen/details_text_small" />
-    </RelativeLayout>
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/reviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fav_movie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_star_border"
+                android:tint="@android:color/white"
+                app:elevation="@dimen/fab_normal_elevation"
+                app:fabSize="normal"
+                app:pressedTranslationZ="@dimen/fab_pressed_elevation" />
+
+        </FrameLayout>
+    </ScrollView>
 </LinearLayout>

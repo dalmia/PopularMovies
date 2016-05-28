@@ -14,8 +14,17 @@
     <string-array name="sort_choice_list">
         <item>Most Popular</item>
         <item>Highest Rated</item>
+        <item>Favourites</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favourites">favourites</string>
+    <string name="trailers">Trailers</string>
+    <string name="reviews">Reviews</string>
+    <string name="append_response">append_to_response</string>
+    <string name="movie_by_id_base_url">http://api.themoviedb.org/3/movie/</string>
+    <string name="append_parameter_value">trailers,reviews</string>
+    <string name="youtube_thumbnail_base_url">http://img.youtube.com/vi/</string>
+    <string name="youtube_base_url">https://www.youtube.com/watch?v=</string>
 </resources>
